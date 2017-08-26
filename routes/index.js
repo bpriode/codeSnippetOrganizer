@@ -74,10 +74,10 @@ let getData = function (db, callback) {
 
 router.get('/listing', function (req, res) {
 
-  User.find({}).sort('name')
-  .then(function(users) {
-    data = users;
-      res.render('listing', {users: users});
+  Snippet.find({}).sort('author')
+  .then(function(snippets) {
+    data = snippets;
+      res.render('listing', {snippets: snippets });
   })
   .catch(function(err) {
       res.send(err);
