@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
+const Snippet = require('../models/snippet')
 const mongose = require('mongoose');
 const passport = require('passport');
 const router = express.Router();
@@ -77,13 +78,34 @@ router.get('/listing', function (req, res) {
   .then(function(users) {
     data = users;
       res.render('listing', {users: users});
-    // next();
   })
-  // .catch(function(err) {
-  //   // console.log(err);
-  //   next(err);
-  // })
+  .catch(function(err) {
+      res.send(err);
+  })
 });
+
+router.get('/create', requireLogin, function(req, res, next) {
+  res.render('create', {username: req.user.username})
+})
+
+router.post('/create', function(req, res) {
+  let newSnip = {
+      author: req.body.author,
+      title: req.body.title,
+      code: req.body.code,
+      notes: req.body.notes,
+      language: req.body.language,
+      tag: req.body.tag,
+    };
+
+      Snippet.create(newSnip)
+      .then(function(data) {
+        res.redirect('/listing');
+      })
+      .catch(function(err){
+        res.send(err);
+      })
+})
 
 
 

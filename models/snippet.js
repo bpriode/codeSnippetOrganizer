@@ -6,9 +6,9 @@ const Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost:27017/snippetOrganizer');
 
 const snippetSchema = new Schema({
-  author: {type: String, required: false},
+  author: {type: String, required: true},
   title: {type: String, required: false},
-  code: {type: String, required: false},
+  code: {type: String, required: true},
   notes: {type: String, required: false},
   language: {type: String, required: false},
   tag: [String],
