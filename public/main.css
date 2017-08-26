@@ -1,5 +1,6 @@
 *{
   font-family: 'Encode Sans', sans-serif;
+  /*border: 1px solid red;*/
 }
 
 #nav{
@@ -23,9 +24,13 @@ h1{
   text-align: center;
   color: gray;
   font-size: 40px;
-  border-left: 2px solid gray;
-  border-right: 2px solid gray;
+}
 
+h2{
+  text-align: center;
+  color: lightseagreen;
+  border-top: 2px solid lightslategray;
+  border-bottom: 2px solid lightslategray;
 }
 
 .container{
@@ -33,12 +38,9 @@ h1{
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 20px;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-.createForm{
-  justify-content: center;
-}
 
 .login input{
   height: 30px;
@@ -64,6 +66,32 @@ h1{
   color: red;
   font-size: 16px;
   margin-top: 15px;
-
   text-decoration: none;
+}
+
+.createdSnip{
+  display: flex;
+  align-items: left;
+  text-align: left;
+  word-wrap: normal;
+  flex-direction: column;
+  height: 400px;
+  width: 600px;
+  margin: 10px;
+  padding:10px;
+  border: 1px solid black;
+  text-decoration: none;
+  justify-content: center;
+}
+
+.createdSnip a{
+  text-decoration: none;
+  color: lightseagreen;
+  font-style: italic;
+  padding: 10px;
+}
+strong{
+  font-size: 18px;
+  text-transform: uppercase;
+  border-bottom: 2px solid lightslategray;
 }

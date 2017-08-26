@@ -77,7 +77,7 @@ router.get('/listing', function (req, res) {
   Snippet.find({}).sort('author')
   .then(function(snippets) {
     data = snippets;
-      res.render('listing', {snippets: snippets });
+      res.render('listing', {snippets: snippets});
   })
   .catch(function(err) {
       res.send(err);
@@ -105,6 +105,32 @@ router.post('/create', function(req, res) {
       .catch(function(err){
         res.send(err);
       })
+})
+
+router.get('/edit/:id' ,function (req, res) {
+  let editId = req.params.id;
+  let editSnip = data.find(function(snippet) {
+    return snippet.id == editId;
+  })
+  res.render('edit', {snippets: editSnip})
+});
+
+router.post('/edit/:id', function(req, res) {
+  let editId = req.params.id
+
+  Snippet.update({_id: editId}, {
+      author: req.body.author,
+      title: req.body.title || null,
+      code: req.body.code,
+      notes: req.body.notes || null,
+      language: req.body.language || null,
+      tag: req.body.tag || null,
+  }).then(function(data) {
+    res.redirect('/listing');
+  })
+  .catch(function(err) {
+    res.send(err);
+  })
 })
 
 

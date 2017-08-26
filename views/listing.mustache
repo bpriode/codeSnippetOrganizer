@@ -3,10 +3,20 @@
 {{#snippets}}
 
 
-  <div class="profile">
+  <div class="createdSnip">
 
-<p>Created by: {{author}}</p>
+        <p><strong>Created by: </strong>{{author}}</p>
 
-<p>{{code}}</p>
+        <p><strong>Code Snippet: </strong><pre>{{code}}</pre></p>
+
+        <p><strong>Language:</strong>{{language}}</p>
+
+        <p><strong>Tags: </strong>{{tag}}</p>
+
+        <a href="/edit/{{id}}">Edit Snippet</a>
+      
+
+  </div>
+
 
 {{/snippets}}
