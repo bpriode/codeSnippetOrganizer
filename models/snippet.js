@@ -5,16 +5,15 @@ const Schema = mongoose.Schema
 
 mongoose.connect('mongodb://localhost:27017/snippetOrganizer');
 
-const snippitSchema = new Schema({
+const snippetSchema = new Schema({
   author: {type: String, required: false},
   title: {type: String, required: false},
   code: {type: String, required: false},
-  note: String,
-  language: String,
+  notes: {type: String, required: false},
+  language: {type: String, required: false},
   tag: [String],
-  public: Boolean
 })
 
-const Snippit = mongoose.model('Snippit', snippitSchema)
+const Snippet = mongoose.model('Snippet', snippetSchema)
 
-module.exports = Snippit
+module.exports = Snippet
