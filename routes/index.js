@@ -1,9 +1,9 @@
-const express = require('express');
-const User = require('../models/user');
-const Snippet = require('../models/snippet')
-const mongose = require('mongoose');
+const express  = require('express');
+const User     = require('../models/user');
+const Snippet  = require('../models/snippet')
+const mongose  = require('mongoose');
 const passport = require('passport');
-const router = express.Router();
+const router   = express.Router();
 
 let data = [];
 
@@ -49,7 +49,7 @@ router.post("/signup", function(req, res) {
   })
   .then(function(data) {
     // console.log(data);
-    res.redirect("/login");
+    res.redirect("/");
   })
   .catch(function(err) {
     // console.log(err);
@@ -132,8 +132,6 @@ router.post('/edit/:id', function(req, res) {
     res.send(err);
   })
 })
-
-
 
 
 
