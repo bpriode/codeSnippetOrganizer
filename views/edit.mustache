@@ -1,26 +1,20 @@
 <link rel="stylesheet" href="../main.css">
 
 {{#snippets}}
-<form class="" action="/edit/{{id}}" method="post">
-  <h2>Edit Your Snippet</h2>
-  <br>
-  <p>Author of Code</p>
-  <input type="text" name="author" value="{{author}}" placeholder="author = username">
-  <br>
-  <p>Create your Snippet</p>
-  <input type="text" name="title" value="{{title}}" placeholder="tite of snippet">
-  <br>
-  <br>
-  <textarea name="code" rows="8" cols="80" placeholder="write your code snippet here"
-   value="{{code}}"></textarea>
-  <br>
-  <input type="text" name="notes" value="{{notes}}" placeholder=" notes/comments">
-  <br>
-  <p>Help to Organize your Snippets</p>
-  <input type="text" name="language" value="{{langauge}}" placeholder="language">
-  <input type="text" name="tag" value="{{tag}}" placeholder="search tags">
-  <br>
-  <input type="submit" name="submit" placeholder="submit">
-</form>
-
-{{/snippets}}
+  <form class="" action="/edit/{{id}}" method="post">
+    <h2>Edit Snippet</h2>
+    <br>
+    <input type="text" name="title" value="{{title}}" placeholder="title of snippet">
+    <br>
+    <br>
+    <textarea name="code" rows="8" cols="80">{{code}}</textarea>
+    <br>
+    <input type="text" name="notes" value="{{notes}}" placeholder=" notes/comments">
+    <br>
+    <p>Help to Organize your Snippets</p>
+    <input type="text" name="language" value="{{language}}" placeholder="language">
+    <input type="text" name="tag" value="{{tag}}" placeholder="search tags">
+    <br>
+    <input type="submit" name="submit" placeholder="submit">
+  </form>
+ {{/snippets}}

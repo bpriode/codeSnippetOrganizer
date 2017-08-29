@@ -1,5 +1,5 @@
 
-
+<link rel="stylesheet" href="../main.css">
 
 {{#snippets}}
   <div class="createdSnip">
@@ -24,19 +24,11 @@
 
     <p><strong>Tags: </strong>
       <br/>
-      {{#tag}}
-      <a href="/tags/{{.}}">{{.}}</a>
-      {{/tag}}
-    </p>
+      {{tag}}</p>
       <br>
-      {{#canEdit}}
-      This is your Snippet. You can:
-        <a href="/edit/{{id}}">Edit Snippet</a>
-        <a href="/delete/{{id}}">Delete Snippet</a>
-      {{/canEdit}}
-      {{^canEdit}}
+
         <p><strong>Created by: </strong>{{username}}</p>
-      {{/canEdit}}
+
 
 
   </div>

@@ -10,7 +10,6 @@ let data = [];
 
 const requireLogin = function (req, res, next) {
   if (req.user) {
-    // console.log(req.user)
     next()
   } else {
     res.redirect('/');
@@ -66,17 +65,21 @@ router.get("/logout", function(req, res) {
 let getData = function (db, callback) {
   let users = db.collection('users');
 
-    User.find({}).toArray().sort({'name': 1}).then(function(users) {
+    User.find({}).toArray().sort({'username': 1}).then(function(users) {
         data = users;
         callback();
     });
 };
 
-router.get('/listing', function (req, res) {
+router.get('/listing', requireLogin, function (req, res, next) {
 
-  Snippet.find({}).sort('author')
+  Snippet.find({}).sort('username')
   .then(function(snippets) {
-    data = snippets;
+    snippets.forEach(function(snip) {
+      if (snip.username === req.user.username) {
+        snip.canEdit = true;
+      }
+    })
       res.render('listing', {snippets: snippets});
   })
   .catch(function(err) {
@@ -89,13 +92,15 @@ router.get('/create', requireLogin, function(req, res, next) {
 })
 
 router.post('/create', function(req, res) {
+  let tags = req.body.tag.split(",");
+  console.log(tags);
   let newSnip = {
-      author: req.body.author,
       title: req.body.title,
       code: req.body.code,
       notes: req.body.notes,
       language: req.body.language,
-      tag: req.body.tag,
+      tag: tags,
+      username: req.user.username,
     };
 
       Snippet.create(newSnip)
@@ -108,18 +113,22 @@ router.post('/create', function(req, res) {
 })
 
 router.get('/edit/:id' ,function (req, res) {
-  let editId = req.params.id;
-  let editSnip = data.find(function(snippet) {
-    return snippet.id == editId;
+
+  Snippet.find({_id: req.params.id})
+  .then(function(snippets) {
+  res.render('edit', {snippets: snippets});
+})
+  .catch(function(err) {
+    res.send(err);
   })
-  res.render('edit', {snippets: editSnip})
 });
+
+
 
 router.post('/edit/:id', function(req, res) {
   let editId = req.params.id
 
   Snippet.update({_id: editId}, {
-      author: req.body.author,
       title: req.body.title || null,
       code: req.body.code,
       notes: req.body.notes || null,
@@ -132,6 +141,41 @@ router.post('/edit/:id', function(req, res) {
     res.send(err);
   })
 })
+
+router.get('/language/:language', function (req, res) {
+  Snippet.find({language: req.params.language})
+  .then(function(snippets) {
+  res.render('language', {snippets: snippets});
+})
+  .catch(function(err) {
+    res.send(err);
+  })
+});
+
+router.get('/tags/:tags', function (req, res) {
+  Snippet.find({tags: req.params.tag})
+  .then(function(snippets) {
+  res.render('tags', {snippets: snippets});
+})
+  .catch(function(err) {
+    res.send(err);
+  })
+});
+
+
+
+router.get('/delete/:id', function(req, res) {
+
+  let id = req.params.id;
+
+  Snippet.deleteOne({_id: id})
+  .then(function (data) {
+    res.redirect('/')
+  })
+  .catch(function(err) {
+    res.send(err);
+  })
+});
 
 
 
