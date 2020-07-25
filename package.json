@@ -19,7 +19,7 @@
     "express-session": "^1.15.5",
     "express-sessions": "^1.0.6",
     "mongodb": "^2.2.31",
-    "mongoose": "^4.10.8",
+    "mongoose": "^5.7.5",
     "morgan": "^1.8.2",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5",
